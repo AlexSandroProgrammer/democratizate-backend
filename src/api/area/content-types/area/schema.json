@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "areas",
+  "info": {
+    "singularName": "area",
+    "pluralName": "areas",
+    "displayName": "Area"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombreArea": {
+      "type": "string"
+    },
+    "estado": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::estado.estado"
+    },
+    "unidades": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::unidad.unidad",
+      "mappedBy": "area"
+    },
+    "programas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::programa.programa",
+      "mappedBy": "area"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "programas",
+  "info": {
+    "singularName": "programa",
+    "pluralName": "programas",
+    "displayName": "programa"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombrePrograma": {
+      "type": "string"
+    },
+    "descripcionPrograma": {
+      "type": "text"
+    },
+    "area": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::area.area",
+      "inversedBy": "programas"
+    },
+    "estado": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::estado.estado"
+    },
+    "fichas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ficha.ficha",
+      "mappedBy": "programa"
+    }
+  }
+}

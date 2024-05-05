@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "firmas",
+  "info": {
+    "singularName": "firma",
+    "pluralName": "firmas",
+    "displayName": "Firma"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "quienFirma": {
+      "type": "string"
+    }
+  }
+}

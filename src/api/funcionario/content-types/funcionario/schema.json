@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "funcionarios",
+  "info": {
+    "singularName": "funcionario",
+    "pluralName": "funcionarios",
+    "displayName": "Funcionario"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "NombreFuncionario": {
+      "type": "string"
+    },
+    "documento": {
+      "type": "integer"
+    },
+    "cargoFuncionario": {
+      "type": "string"
+    },
+    "fotoFirma": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "estadoFuncionario": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::estado.estado"
+    }
+  }
+}

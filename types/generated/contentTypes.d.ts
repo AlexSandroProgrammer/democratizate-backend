@@ -362,37 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAprendizAprendiz extends Schema.CollectionType {
-  collectionName: 'aprendices';
-  info: {
-    singularName: 'aprendiz';
-    pluralName: 'aprendices';
-    displayName: 'Aprendiz';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nombres: Attribute.Text;
-    Apellidos: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::aprendiz.aprendiz',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::aprendiz.aprendiz',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -819,6 +788,346 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAprendizAprendiz extends Schema.CollectionType {
+  collectionName: 'aprendices';
+  info: {
+    singularName: 'aprendiz';
+    pluralName: 'aprendices';
+    displayName: 'Aprendiz';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nombres: Attribute.Text;
+    Apellidos: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::aprendiz.aprendiz',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::aprendiz.aprendiz',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAreaArea extends Schema.CollectionType {
+  collectionName: 'areas';
+  info: {
+    singularName: 'area';
+    pluralName: 'areas';
+    displayName: 'Area';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombreArea: Attribute.String;
+    estado: Attribute.Relation<
+      'api::area.area',
+      'oneToOne',
+      'api::estado.estado'
+    >;
+    unidades: Attribute.Relation<
+      'api::area.area',
+      'oneToMany',
+      'api::unidad.unidad'
+    >;
+    programas: Attribute.Relation<
+      'api::area.area',
+      'oneToMany',
+      'api::programa.programa'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::area.area', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::area.area', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEstadoEstado extends Schema.CollectionType {
+  collectionName: 'estados';
+  info: {
+    singularName: 'estado';
+    pluralName: 'estados';
+    displayName: 'Estado';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombreEstado: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::estado.estado',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::estado.estado',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFichaFicha extends Schema.CollectionType {
+  collectionName: 'fichas';
+  info: {
+    singularName: 'ficha';
+    pluralName: 'fichas';
+    displayName: 'Fichas';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    codigoFicha: Attribute.BigInteger;
+    programa: Attribute.Relation<
+      'api::ficha.ficha',
+      'manyToOne',
+      'api::programa.programa'
+    >;
+    cantidadAprendices: Attribute.Integer;
+    inicio_formacion: Attribute.Date;
+    fin_formacion: Attribute.Date;
+    estadoFicha: Attribute.Relation<
+      'api::ficha.ficha',
+      'oneToOne',
+      'api::estado.estado'
+    >;
+    estadoSenaEmpresa: Attribute.Relation<
+      'api::ficha.ficha',
+      'oneToOne',
+      'api::estado.estado'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ficha.ficha',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ficha.ficha',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFirmaFirma extends Schema.CollectionType {
+  collectionName: 'firmas';
+  info: {
+    singularName: 'firma';
+    pluralName: 'firmas';
+    displayName: 'Firma';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    quienFirma: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::firma.firma',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::firma.firma',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFuncionarioFuncionario extends Schema.CollectionType {
+  collectionName: 'funcionarios';
+  info: {
+    singularName: 'funcionario';
+    pluralName: 'funcionarios';
+    displayName: 'Funcionario';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    NombreFuncionario: Attribute.String;
+    documento: Attribute.Integer;
+    cargoFuncionario: Attribute.String;
+    fotoFirma: Attribute.Media;
+    estadoFuncionario: Attribute.Relation<
+      'api::funcionario.funcionario',
+      'oneToOne',
+      'api::estado.estado'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::funcionario.funcionario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::funcionario.funcionario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProgramaPrograma extends Schema.CollectionType {
+  collectionName: 'programas';
+  info: {
+    singularName: 'programa';
+    pluralName: 'programas';
+    displayName: 'programa';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombrePrograma: Attribute.String;
+    descripcionPrograma: Attribute.Text;
+    area: Attribute.Relation<
+      'api::programa.programa',
+      'manyToOne',
+      'api::area.area'
+    >;
+    estado: Attribute.Relation<
+      'api::programa.programa',
+      'oneToOne',
+      'api::estado.estado'
+    >;
+    fichas: Attribute.Relation<
+      'api::programa.programa',
+      'oneToMany',
+      'api::ficha.ficha'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::programa.programa',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::programa.programa',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSugerenciaSugerencia extends Schema.CollectionType {
+  collectionName: 'sugerencias';
+  info: {
+    singularName: 'sugerencia';
+    pluralName: 'sugerencias';
+    displayName: 'sugerencia';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tipoSugerencia: Attribute.String;
+    comentario: Attribute.Text;
+    correoUsuario: Attribute.Email;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sugerencia.sugerencia',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sugerencia.sugerencia',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUnidadUnidad extends Schema.CollectionType {
+  collectionName: 'unidades';
+  info: {
+    singularName: 'unidad';
+    pluralName: 'unidades';
+    displayName: 'Unidad';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombreUnidad: Attribute.String;
+    tipoTurno: Attribute.String;
+    area: Attribute.Relation<
+      'api::unidad.unidad',
+      'manyToOne',
+      'api::area.area'
+    >;
+    codigoUnidad: Attribute.String;
+    horaInicio: Attribute.Date;
+    horaFin: Attribute.Date;
+    cantidadAprendices: Attribute.Integer;
+    estado: Attribute.Relation<
+      'api::unidad.unidad',
+      'oneToOne',
+      'api::estado.estado'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::unidad.unidad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::unidad.unidad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -829,7 +1138,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::aprendiz.aprendiz': ApiAprendizAprendiz;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -838,6 +1146,15 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::aprendiz.aprendiz': ApiAprendizAprendiz;
+      'api::area.area': ApiAreaArea;
+      'api::estado.estado': ApiEstadoEstado;
+      'api::ficha.ficha': ApiFichaFicha;
+      'api::firma.firma': ApiFirmaFirma;
+      'api::funcionario.funcionario': ApiFuncionarioFuncionario;
+      'api::programa.programa': ApiProgramaPrograma;
+      'api::sugerencia.sugerencia': ApiSugerenciaSugerencia;
+      'api::unidad.unidad': ApiUnidadUnidad;
     }
   }
 }
