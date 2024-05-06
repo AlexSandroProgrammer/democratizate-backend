@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "codigoFicha": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "unique": true
     },
     "programa": {
       "type": "relation",
@@ -30,15 +31,23 @@
     "fin_formacion": {
       "type": "date"
     },
-    "estadoFicha": {
+    "estado_ficha": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::estado.estado"
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "fichas"
     },
-    "estadoSenaEmpresa": {
+    "estado_sena_empresa": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::estado.estado"
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "fichas"
+    },
+    "aprendices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::aprendiz.aprendiz",
+      "mappedBy": "ficha"
     }
   }
 }

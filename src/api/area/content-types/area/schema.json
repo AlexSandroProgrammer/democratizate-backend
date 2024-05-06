@@ -4,7 +4,8 @@
   "info": {
     "singularName": "area",
     "pluralName": "areas",
-    "displayName": "Area"
+    "displayName": "Area",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,8 +17,15 @@
     },
     "estado": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::estado.estado"
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "areas"
+    },
+    "programas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::programa.programa",
+      "mappedBy": "area"
     },
     "unidades": {
       "type": "relation",
@@ -25,11 +33,11 @@
       "target": "api::unidad.unidad",
       "mappedBy": "area"
     },
-    "programas": {
+    "turnosrutinarios": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::programa.programa",
-      "mappedBy": "area"
+      "relation": "manyToMany",
+      "target": "api::turnorutinario.turnorutinario",
+      "mappedBy": "areas"
     }
   }
 }

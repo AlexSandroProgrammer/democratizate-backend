@@ -17,6 +17,45 @@
     },
     "Apellidos": {
       "type": "text"
+    },
+    "documento": {
+      "type": "integer"
+    },
+    "tipoDocumento": {
+      "type": "string"
+    },
+    "numeroCelular": {
+      "type": "string"
+    },
+    "sexo": {
+      "type": "string"
+    },
+    "correoElectronico": {
+      "type": "email"
+    },
+    "estado": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "aprendizs"
+    },
+    "estado_sena_empresa": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "aprendices"
+    },
+    "ficha": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ficha.ficha",
+      "inversedBy": "aprendices"
+    },
+    "turnosrutinarios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::turnorutinario.turnorutinario",
+      "mappedBy": "aprendiz"
     }
   }
 }

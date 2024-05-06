@@ -4,7 +4,8 @@
   "info": {
     "singularName": "programa",
     "pluralName": "programas",
-    "displayName": "programa"
+    "displayName": "programa",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,8 +26,9 @@
     },
     "estado": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::estado.estado"
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "programas"
     },
     "fichas": {
       "type": "relation",

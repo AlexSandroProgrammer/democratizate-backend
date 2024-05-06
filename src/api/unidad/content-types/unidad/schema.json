@@ -18,12 +18,6 @@
     "tipoTurno": {
       "type": "string"
     },
-    "area": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::area.area",
-      "inversedBy": "unidades"
-    },
     "codigoUnidad": {
       "type": "string"
     },
@@ -38,8 +32,15 @@
     },
     "estado": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::estado.estado"
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "unidades"
+    },
+    "area": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::area.area",
+      "inversedBy": "unidades"
     }
   }
 }

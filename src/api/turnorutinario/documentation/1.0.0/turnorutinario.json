@@ -1,5 +1,5 @@
 {
-  "/firmas": {
+  "/turnosrutinarios": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FirmaListResponse"
+                "$ref": "#/components/schemas/TurnorutinarioListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "Firma"
+        "Turnorutinario"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/firmas"
+      "operationId": "get/turnosrutinarios"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FirmaResponse"
+                "$ref": "#/components/schemas/TurnorutinarioResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "Firma"
+        "Turnorutinario"
       ],
       "parameters": [],
-      "operationId": "post/firmas",
+      "operationId": "post/turnosrutinarios",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/FirmaRequest"
+              "$ref": "#/components/schemas/TurnorutinarioRequest"
             }
           }
         }
       }
     }
   },
-  "/firmas/{id}": {
+  "/turnosrutinarios/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FirmaResponse"
+                "$ref": "#/components/schemas/TurnorutinarioResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "Firma"
+        "Turnorutinario"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/firmas/{id}"
+      "operationId": "get/turnosrutinarios/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FirmaResponse"
+                "$ref": "#/components/schemas/TurnorutinarioResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "Firma"
+        "Turnorutinario"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/firmas/{id}",
+      "operationId": "put/turnosrutinarios/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/FirmaRequest"
+              "$ref": "#/components/schemas/TurnorutinarioRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "Firma"
+        "Turnorutinario"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/firmas/{id}"
+      "operationId": "delete/turnosrutinarios/{id}"
     }
   }
 }

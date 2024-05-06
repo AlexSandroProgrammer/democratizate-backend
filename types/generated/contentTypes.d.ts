@@ -802,6 +802,31 @@ export interface ApiAprendizAprendiz extends Schema.CollectionType {
   attributes: {
     Nombres: Attribute.Text;
     Apellidos: Attribute.Text;
+    documento: Attribute.Integer;
+    tipoDocumento: Attribute.String;
+    numeroCelular: Attribute.String;
+    sexo: Attribute.String;
+    correoElectronico: Attribute.Email;
+    estado: Attribute.Relation<
+      'api::aprendiz.aprendiz',
+      'manyToOne',
+      'api::estado.estado'
+    >;
+    estado_sena_empresa: Attribute.Relation<
+      'api::aprendiz.aprendiz',
+      'manyToOne',
+      'api::estado.estado'
+    >;
+    ficha: Attribute.Relation<
+      'api::aprendiz.aprendiz',
+      'manyToOne',
+      'api::ficha.ficha'
+    >;
+    turnosrutinarios: Attribute.Relation<
+      'api::aprendiz.aprendiz',
+      'oneToMany',
+      'api::turnorutinario.turnorutinario'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -826,6 +851,7 @@ export interface ApiAreaArea extends Schema.CollectionType {
     singularName: 'area';
     pluralName: 'areas';
     displayName: 'Area';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -834,18 +860,23 @@ export interface ApiAreaArea extends Schema.CollectionType {
     nombreArea: Attribute.String;
     estado: Attribute.Relation<
       'api::area.area',
-      'oneToOne',
+      'manyToOne',
       'api::estado.estado'
+    >;
+    programas: Attribute.Relation<
+      'api::area.area',
+      'oneToMany',
+      'api::programa.programa'
     >;
     unidades: Attribute.Relation<
       'api::area.area',
       'oneToMany',
       'api::unidad.unidad'
     >;
-    programas: Attribute.Relation<
+    turnosrutinarios: Attribute.Relation<
       'api::area.area',
-      'oneToMany',
-      'api::programa.programa'
+      'manyToMany',
+      'api::turnorutinario.turnorutinario'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -869,6 +900,41 @@ export interface ApiEstadoEstado extends Schema.CollectionType {
   };
   attributes: {
     nombreEstado: Attribute.String;
+    aprendizs: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::aprendiz.aprendiz'
+    >;
+    aprendices: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::aprendiz.aprendiz'
+    >;
+    areas: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::area.area'
+    >;
+    fichas: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::ficha.ficha'
+    >;
+    funcionarios: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::funcionario.funcionario'
+    >;
+    programas: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::programa.programa'
+    >;
+    unidades: Attribute.Relation<
+      'api::estado.estado',
+      'oneToMany',
+      'api::unidad.unidad'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -899,7 +965,7 @@ export interface ApiFichaFicha extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    codigoFicha: Attribute.BigInteger;
+    codigoFicha: Attribute.BigInteger & Attribute.Unique;
     programa: Attribute.Relation<
       'api::ficha.ficha',
       'manyToOne',
@@ -908,15 +974,20 @@ export interface ApiFichaFicha extends Schema.CollectionType {
     cantidadAprendices: Attribute.Integer;
     inicio_formacion: Attribute.Date;
     fin_formacion: Attribute.Date;
-    estadoFicha: Attribute.Relation<
+    estado_ficha: Attribute.Relation<
       'api::ficha.ficha',
-      'oneToOne',
+      'manyToOne',
       'api::estado.estado'
     >;
-    estadoSenaEmpresa: Attribute.Relation<
+    estado_sena_empresa: Attribute.Relation<
       'api::ficha.ficha',
-      'oneToOne',
+      'manyToOne',
       'api::estado.estado'
+    >;
+    aprendices: Attribute.Relation<
+      'api::ficha.ficha',
+      'oneToMany',
+      'api::aprendiz.aprendiz'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -929,36 +1000,6 @@ export interface ApiFichaFicha extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::ficha.ficha',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFirmaFirma extends Schema.CollectionType {
-  collectionName: 'firmas';
-  info: {
-    singularName: 'firma';
-    pluralName: 'firmas';
-    displayName: 'Firma';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    quienFirma: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::firma.firma',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::firma.firma',
       'oneToOne',
       'admin::user'
     > &
@@ -972,6 +1013,7 @@ export interface ApiFuncionarioFuncionario extends Schema.CollectionType {
     singularName: 'funcionario';
     pluralName: 'funcionarios';
     displayName: 'Funcionario';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -981,9 +1023,9 @@ export interface ApiFuncionarioFuncionario extends Schema.CollectionType {
     documento: Attribute.Integer;
     cargoFuncionario: Attribute.String;
     fotoFirma: Attribute.Media;
-    estadoFuncionario: Attribute.Relation<
+    estado_funcionario: Attribute.Relation<
       'api::funcionario.funcionario',
-      'oneToOne',
+      'manyToOne',
       'api::estado.estado'
     >;
     createdAt: Attribute.DateTime;
@@ -1010,6 +1052,7 @@ export interface ApiProgramaPrograma extends Schema.CollectionType {
     singularName: 'programa';
     pluralName: 'programas';
     displayName: 'programa';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1024,7 +1067,7 @@ export interface ApiProgramaPrograma extends Schema.CollectionType {
     >;
     estado: Attribute.Relation<
       'api::programa.programa',
-      'oneToOne',
+      'manyToOne',
       'api::estado.estado'
     >;
     fichas: Attribute.Relation<
@@ -1082,6 +1125,51 @@ export interface ApiSugerenciaSugerencia extends Schema.CollectionType {
   };
 }
 
+export interface ApiTurnorutinarioTurnorutinario extends Schema.CollectionType {
+  collectionName: 'turnosrutinarios';
+  info: {
+    singularName: 'turnorutinario';
+    pluralName: 'turnosrutinarios';
+    displayName: 'Turnorutinario';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aprendiz: Attribute.Relation<
+      'api::turnorutinario.turnorutinario',
+      'manyToOne',
+      'api::aprendiz.aprendiz'
+    >;
+    horarioInicial: Attribute.Time;
+    horaFinal: Attribute.Time;
+    fechaInicial: Attribute.Date;
+    fechaFinal: Attribute.Date;
+    areas: Attribute.Relation<
+      'api::turnorutinario.turnorutinario',
+      'manyToMany',
+      'api::area.area'
+    >;
+    UnidadTurno: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::turnorutinario.turnorutinario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::turnorutinario.turnorutinario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiUnidadUnidad extends Schema.CollectionType {
   collectionName: 'unidades';
   info: {
@@ -1096,19 +1184,19 @@ export interface ApiUnidadUnidad extends Schema.CollectionType {
   attributes: {
     nombreUnidad: Attribute.String;
     tipoTurno: Attribute.String;
-    area: Attribute.Relation<
-      'api::unidad.unidad',
-      'manyToOne',
-      'api::area.area'
-    >;
     codigoUnidad: Attribute.String;
     horaInicio: Attribute.Date;
     horaFin: Attribute.Date;
     cantidadAprendices: Attribute.Integer;
     estado: Attribute.Relation<
       'api::unidad.unidad',
-      'oneToOne',
+      'manyToOne',
       'api::estado.estado'
+    >;
+    area: Attribute.Relation<
+      'api::unidad.unidad',
+      'manyToOne',
+      'api::area.area'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1150,10 +1238,10 @@ declare module '@strapi/types' {
       'api::area.area': ApiAreaArea;
       'api::estado.estado': ApiEstadoEstado;
       'api::ficha.ficha': ApiFichaFicha;
-      'api::firma.firma': ApiFirmaFirma;
       'api::funcionario.funcionario': ApiFuncionarioFuncionario;
       'api::programa.programa': ApiProgramaPrograma;
       'api::sugerencia.sugerencia': ApiSugerenciaSugerencia;
+      'api::turnorutinario.turnorutinario': ApiTurnorutinarioTurnorutinario;
       'api::unidad.unidad': ApiUnidadUnidad;
     }
   }

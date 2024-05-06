@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "turnosrutinarios",
+  "info": {
+    "singularName": "turnorutinario",
+    "pluralName": "turnosrutinarios",
+    "displayName": "Turnorutinario",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "aprendiz": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::aprendiz.aprendiz",
+      "inversedBy": "turnosrutinarios"
+    },
+    "horarioInicial": {
+      "type": "time"
+    },
+    "horaFinal": {
+      "type": "time"
+    },
+    "fechaInicial": {
+      "type": "date"
+    },
+    "fechaFinal": {
+      "type": "date"
+    },
+    "areas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::area.area",
+      "inversedBy": "turnosrutinarios"
+    },
+    "UnidadTurno": {
+      "type": "string"
+    }
+  }
+}

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "funcionario",
     "pluralName": "funcionarios",
-    "displayName": "Funcionario"
+    "displayName": "Funcionario",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,19 +22,21 @@
       "type": "string"
     },
     "fotoFirma": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
-    "estadoFuncionario": {
+    "estado_funcionario": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::estado.estado"
+      "relation": "manyToOne",
+      "target": "api::estado.estado",
+      "inversedBy": "funcionarios"
     }
   }
 }
